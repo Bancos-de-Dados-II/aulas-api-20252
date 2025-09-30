@@ -6,6 +6,10 @@ app.get('/tarefas', (req, res) => {
   res.send('Retorna todas as tarefas');
 });
 
+app.get('/tarefas/:id', (req, res) => {
+  res.send('Retorna a tarefa' + req.params.id);
+});
+
 app.post('/tarefas', (req,res)=>{
   res.send('Criando uma tarefa');
 });
