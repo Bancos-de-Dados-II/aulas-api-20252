@@ -2,8 +2,20 @@ import express from 'express';
 const app = express();
 const port = 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+app.get('/tarefas', (req, res) => {
+  res.send('Retorna todas as tarefas');
+});
+
+app.post('/tarefas', (req,res)=>{
+  res.send('Criando uma tarefa');
+});
+
+app.delete('/tarefas/:id', (req,res)=>{
+  res.send('Deletando a tarefa '+req.params.id);
+});
+
+app.patch('/tarefas/:id', (req,res)=>{
+  res.send('Atualizando a tarefa' +req.params.id);
 });
 
 app.listen(port, () => {
