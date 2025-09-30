@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/Bancos-de-Dados-II/aulas-api-20252#readme",
   "dependencies": {
-    "express": "^5.1.0"
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "sequelize": "^6.37.7"
   }
 }
