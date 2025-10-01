@@ -20,3 +20,7 @@ const Tarefa = sequelize.define('Tarefa',{
         allowNull: false
     }
 });
+
+Tarefa.sync({force:true});
+
+export default Tarefa;
