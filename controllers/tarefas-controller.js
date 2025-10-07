@@ -13,3 +13,12 @@ export async function criarTarefa(req, res){
         res.status(400).json({ error: error.message });
     }
 }
+
+export async function buscarTarefa(req,res){
+    const tarefa = await Tarefa.findByPk(req.params.id);
+    if(tarefa){
+        res.json(tarefa);
+    } else {
+        res.status(404).json({ error: 'Tarefa não encontrada' });
+    }
+}
