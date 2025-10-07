@@ -6,6 +6,10 @@ export async function listarTarefas(req, res){
 }
 
 export async function criarTarefa(req, res){
-    const tarefa = await Tarefa.create(req.body);
-    res.status(201).json(tarefa);
+    try{
+        const tarefa = await Tarefa.create(req.body);
+        res.status(201).json(tarefa);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
 }
