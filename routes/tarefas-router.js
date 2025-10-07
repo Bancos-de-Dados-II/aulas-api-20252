@@ -1,5 +1,5 @@
 import express from 'express';
-import {listarTarefas} from 
+import {listarTarefas, criarTarefa} from 
   '../controllers/tarefas-controller.js';
 const tarefasRouter = express.Router();
 
@@ -9,9 +9,7 @@ tarefasRouter.get('/:id', (req, res) => {
   res.send('Retorna a tarefa' + req.params.id);
 });
 
-tarefasRouter.post('', (req,res)=>{
-  res.send('Criando uma tarefa\n' + JSON.stringify(req.body));
-});
+tarefasRouter.post('', criarTarefa);
 
 tarefasRouter.delete('/:id', (req,res)=>{
   res.send('Deletando a tarefa '+req.params.id);
