@@ -1,5 +1,6 @@
 import express from 'express';
-import {listarTarefas, criarTarefa, buscarTarefa} from 
+import {listarTarefas, criarTarefa, buscarTarefa,
+  deletarTarefa} from 
   '../controllers/tarefas-controller.js';
 const tarefasRouter = express.Router();
 
@@ -9,9 +10,7 @@ tarefasRouter.get('/:id', buscarTarefa);
 
 tarefasRouter.post('', criarTarefa);
 
-tarefasRouter.delete('/:id', (req,res)=>{
-  res.send('Deletando a tarefa '+req.params.id);
-});
+tarefasRouter.delete('/:id', deletarTarefa);
 
 tarefasRouter.patch('/:id', (req,res)=>{
   res.send('Atualizando a tarefa' +req.params.id);
