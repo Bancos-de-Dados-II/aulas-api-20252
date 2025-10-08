@@ -25,7 +25,19 @@
                 descricao: document.getElementById('inputDescricao').value,
                 categoria: document.getElementById('selectCategoria').value 
             }
-            console.log(tarefa);
+            fetch('http://localhost:3000/tarefas',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(tarefa)
+            }).then(res =>{
+                console.log(res);
+                alert('Tarefa salva com sucesso!');
+            }).catch(err =>{
+                console.log(err);
+                alert('Falha ao salvar');
+            });
         });
     </script>
 
