@@ -32,8 +32,12 @@
                 },
                 body: JSON.stringify(tarefa)
             }).then(res =>{
-                console.log(res);
-                alert('Tarefa salva com sucesso!');
+                if(res.status === 201){
+                    alert('Tarefa salva com sucesso!');
+                }else{
+                    alert('Falha ao salvar');
+                }
+             
             }).catch(err =>{
                 console.log(err);
                 alert('Falha ao salvar');
