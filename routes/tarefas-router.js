@@ -1,19 +1,13 @@
 import express from 'express';
 import {listarTarefas, criarTarefa, buscarTarefa,
-  deletarTarefa} from 
+  deletarTarefa, atualizarTarefa} from 
   '../controllers/tarefas-controller.js';
 const tarefasRouter = express.Router();
 
 tarefasRouter.get('', listarTarefas);
-
 tarefasRouter.get('/:id', buscarTarefa);
-
 tarefasRouter.post('', criarTarefa);
-
 tarefasRouter.delete('/:id', deletarTarefa);
-
-tarefasRouter.patch('/:id', (req,res)=>{
-  res.send('Atualizando a tarefa' +req.params.id);
-});
+tarefasRouter.patch('/:id', atualizarTarefa);
 
 export default tarefasRouter;

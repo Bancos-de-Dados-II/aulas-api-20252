@@ -32,3 +32,14 @@ export async function deletarTarefa(req,res){
         res.status(404).json({ error: 'Tarefa não encontrada' });
     }
 }
+
+export async function atualizarTarefa(req,res){
+    const tarefa = await Tarefa.findByPk(req.params.id);
+    if(tarefa){
+        tarefa.set(req.body);
+        await tarefa.save();
+        res.json(tarefa);
+    } else {
+        res.status(404).json({ error: 'Tarefa não encontrada' });
+    }
+}
