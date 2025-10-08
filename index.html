@@ -23,7 +23,7 @@
             const tarefa = {
                 nome: document.getElementById('inputNome').value,
                 descricao: document.getElementById('inputDescricao').value,
-                categoria: document.getElementById('selectCategoria').value 
+                tipo: document.getElementById('selectCategoria').value 
             }
             fetch('http://localhost:3000/tarefas',{
                 method: 'POST',
