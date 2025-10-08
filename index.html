@@ -16,5 +16,18 @@
         </select>
         <button id="salvarButton">Salvar</button>
     </div>
+
+    <script>
+        document.getElementById('salvarButton')
+            .addEventListener('click', async()=>{
+            const tarefa = {
+                nome: document.getElementById('inputNome').value,
+                descricao: document.getElementById('inputDescricao').value,
+                categoria: document.getElementById('selectCategoria').value 
+            }
+            console.log(tarefa);
+        });
+    </script>
+
 </body>
 </html>
