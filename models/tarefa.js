@@ -18,6 +18,9 @@ const Tarefa = sequelize.define('Tarefa',{
         type: DataTypes
             .ENUM('pessoal','profissional','outros'),
         allowNull: false
+    },
+    localizacao:{
+        type: DataTypes.GEOMETRY
     }
 });
 
