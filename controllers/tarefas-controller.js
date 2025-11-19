@@ -24,7 +24,13 @@ export async function buscarTarefa(req,res){
 
     const tarefa = await Tarefa.findByPk(req.params.id);
     if(tarefa){
-        await client.set(req.params.id, JSON.stringify(tarefa));
+        await client.set(req.params.id, 
+            JSON.stringify(tarefa),{
+                expiration: {
+                    type: 'EX',
+                    value: 3600
+            }
+        });
         res.json(tarefa);
     } else {
         res.status(404).json({ error: 'Tarefa não encontrada' });

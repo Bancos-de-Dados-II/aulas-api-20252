@@ -2,6 +2,10 @@ import express from 'express';
 import cors from 'cors';
 const app = express();
 const port = 3000;
+import {controleAcesso}
+  from './middlewares/controle-acesso.js';
+
+app.use(controleAcesso);
 
 app.use(cors());
 
