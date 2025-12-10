@@ -1,29 +1,34 @@
-import sequelize from '../databases/sequelize.js';
-import { DataTypes } from 'sequelize';
+import mongoose from "../databases/mongo.js";
 
-const Tarefa = sequelize.define('Tarefa',{
-    id:{
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+const tarefaSchema = new Schema({
+    id: {
+        type: Schema.Types.UUID,
+        default: () => crypto.randomUUID(),
+        unique: true
     },
-    nome:{
-        type: DataTypes.STRING,
-        allowNull: false
+    nome: {
+        type: String,
+        required: true
     },
-    descricao:{
-        type: DataTypes.STRING
+    descricao: String,
+    tipo: {
+        type: String,
+        enum: ['pessoal', 'profissional', 'outros']
     },
-    tipo:{
-        type: DataTypes
-            .ENUM('pessoal','profissional','outros'),
-        allowNull: false
-    },
-    localizacao:{
-        type: DataTypes.GEOMETRY
+    localizacao: {
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true
+        },
+        coordinates: {
+            type: [Number],
+            required: true
+        }
     }
 });
 
-Tarefa.sync();
+const Tarefas = mongoose
+    .model('Tarefa', tarefaSchema);
 
-export default Tarefa;
+export default Tarefas;
