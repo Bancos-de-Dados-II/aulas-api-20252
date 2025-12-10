@@ -1,4 +1,5 @@
 import mongoose from "../databases/mongo.js";
+const {Schema} = mongoose;
 
 const tarefaSchema = new Schema({
     id: {
