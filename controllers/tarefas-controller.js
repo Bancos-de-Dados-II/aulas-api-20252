@@ -1,5 +1,4 @@
 import Tarefa from "../models/tarefa.js";
-import client from "../databases/redis.js";
 
 export async function listarTarefas(req, res){
     const tarefas = await Tarefa.find();
@@ -7,12 +6,12 @@ export async function listarTarefas(req, res){
 }
 
 export async function criarTarefa(req, res){
-    // try{
-    //     const tarefa = await Tarefa.create(req.body);
-    //     res.status(201).json(tarefa);
-    // } catch (error) {
-    //     res.status(400).json({ error: error.message });
-    // }
+    try{
+        const tarefa = await Tarefa.create(req.body);
+        res.status(201).json(tarefa);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
 }
 
 export async function buscarTarefa(req,res){
