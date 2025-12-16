@@ -39,13 +39,17 @@ export async function buscarTarefa(req,res){
 }
 
 export async function deletarTarefa(req,res){
-    // const tarefa = await Tarefa.findByPk(req.params.id);
-    // if(tarefa){
-    //     await tarefa.destroy();
-    //     res.json(tarefa);
-    // } else {
-    //     res.status(404).json({ error: 'Tarefa não encontrada' });
-    // }
+    const retorno = await Tarefa.deleteOne({
+        id: req.params.id
+    });
+    if(retorno.deletedCount === 0){
+        res.status(404).json(
+            {error:"Tarefa não encontrada"});
+            return;
+    }
+    res.status(200).json({
+        mensagem: "Tarefa deletada com sucesso"
+    });
 }
 
 export async function atualizarTarefa(req,res){
