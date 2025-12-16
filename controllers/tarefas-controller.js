@@ -53,12 +53,18 @@ export async function deletarTarefa(req,res){
 }
 
 export async function atualizarTarefa(req,res){
-    // const tarefa = await Tarefa.findByPk(req.params.id);
-    // if(tarefa){
-    //     tarefa.set(req.body);
-    //     await tarefa.save();
-    //     res.json(tarefa);
-    // } else {
-    //     res.status(404).json({ error: 'Tarefa não encontrada' });
-    // }
+    const retorno = await Tarefa.updateOne(
+        {id:req.params.id},
+        {$set: req.body}
+    );
+    if(retorno.matchedCount === 0){
+        res.status(404).json(
+            {error: "Tarefa não encontrada"});
+        return;
+    }
+    if(retorno.modifiedCount > 0){
+        res.status(200).json({
+            mensagem: "Tarefa atualizada com sucesso"
+        });
+    }
 }
