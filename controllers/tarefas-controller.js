@@ -1,4 +1,5 @@
 import Tarefa from "../models/tarefa.js";
+import client from "../databases/redis.js";
 
 export async function listarTarefas(req, res){
     const tarefas = await Tarefa.find();
@@ -16,24 +17,25 @@ export async function criarTarefa(req, res){
 
 export async function buscarTarefa(req,res){
 
-    // const tarefaCache = await client.get(req.params.id);
-    // if(tarefaCache){
-    //     return res.json(JSON.parse(tarefaCache));
-    // }
+    const tarefaCache = await client.get(req.params.id);
+    if(tarefaCache){
+        return res.json(JSON.parse(tarefaCache));
+    }
 
-    // const tarefa = await Tarefa.findByPk(req.params.id);
-    // if(tarefa){
-    //     await client.set(req.params.id, 
-    //         JSON.stringify(tarefa),{
-    //             expiration: {
-    //                 type: 'EX',
-    //                 value: 3600
-    //         }
-    //     });
-    //     res.json(tarefa);
-    // } else {
-    //     res.status(404).json({ error: 'Tarefa não encontrada' });
-    // }
+    const tarefa = await Tarefa.find({id: 
+        req.params.id});
+    if(tarefa){
+        await client.set(req.params.id, 
+            JSON.stringify(tarefa),{
+                expiration: {
+                    type: 'EX',
+                    value: 3600
+            }
+        });
+        res.json(tarefa);
+    } else {
+        res.status(404).json({ error: 'Tarefa não encontrada' });
+    }
 }
 
 export async function deletarTarefa(req,res){
